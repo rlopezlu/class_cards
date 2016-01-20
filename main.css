@@ -1,0 +1,19 @@
+#card{
+    
+    color:#8e44ad;
+    
+}
+
+#singleCard{
+    margin:auto;
+    width:25%;
+    border : 2px solid #8e44ad;
+}
+
+img{
+    margin:auto;
+}
+
+*{
+    boder: 1px solid green;
+}
