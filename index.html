@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<head>
+    <title> My Hearthstone page</title>
+    <link rel = "stylesheet" href ="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.11.3.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="script.js"></script>
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link rel = "stylesheet" href ="main.css">
+</head>
+
+<html>
+    <body ng-app = "myApp">
+        <div ng-controller ="mainController">
+            <div class="jumbotron">
+                <div class="container">         
+                    <h2>Card Look Up</h2>
+                    
+
+                    <div class="row">
+                        <div ng-repeat="product in products">
+                            <div class="clearfix" ng-if="$index % 3 == 0"></div>
+                            <div class="col-sm-4">
+                                <h2>{{product.title}}</h2>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div ng-repeat="class in classes" ng-if="$index % 3 == 0" class="row">
+                        <div class="col-xs-4"><button type="button" class="btn btn-primary" ng-click="cSelect(class)">{{classes[$index]}}</button></div>
+                        <div class="col-xs-4"><button type="button" class="btn btn-primary" ng-click="cSelect(class)">{{classes[$index + 1]}}</button></div>
+                        <div class="col-xs-4"><button type="button" class="btn btn-primary" ng-click="cSelect(class)">{{classes[$index + 2]}}</button></div>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div class="container">
+                <h2>{{class}}</h2>
+                                    <input class ="filterBar form-control" type="search" id="search" ng-model="search.name" placeholder="Filter By Card Name">
+                   <!-- <input class ="filterBar form-control" type="search" id="search" ng-model="search.type" placeholder="Filter By Type">-->
+                                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Card Type
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <button class="btn btn-default" ng-repeat="type in types" ng-click="search.type = 'Minion'">{{type}} lol</button>
+                        </ul>
+                    </div>
+
+                    <div class="dropdown">
+                        <button class="btn btn-primary dropdown-toggle" type="button" ng-click="setType(type)"data-toggle="dropdown">Rarity
+                        <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <button class="btn btn-default" ng-repeat="rare in rareness" ng-click="setRarity(rare)">{{rare}} lol</button>
+                        </ul>
+                    </div>
+                    <br>
+                    <div id = "singleCard" ng-if="card.collectible == true && card.cost >=0" ng-repeat="card in cards | filter:search" style = "display: inline-block">
+                            <img ng-src="{{card.img}}" ng-click="clickMe(card.name)">
+                    </div>
+            </div>        
+        </div>
+    </body>
+</html>
